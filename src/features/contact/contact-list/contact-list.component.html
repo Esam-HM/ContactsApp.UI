@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <h1 class="col-6">Contacts List</h1>
+        <div class="col-6 d-flex justify-content-end">
+            <button class="btn btn-primary">
+                <i class="bi bi-person-fill-add"></i> Add Contact
+            </button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <ng-container>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col"></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contact of contactList; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.phoneNumber}}</td>
+                            <td>
+                                <button class="btn">
+                                    <i class="bi bi-info-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+    </div>
+</div>

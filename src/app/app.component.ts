@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+
+declare var particlesJS: any;
 
 @Component({
   selector: 'app-root',
@@ -8,6 +11,14 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'ContactsApp.UI';
+export class AppComponent implements AfterViewInit {
+
+  
+  
+  ngAfterViewInit(): void {
+    // particlesJS.load("particles-js", "particles.json", () => {
+    //   console.log("callback - particles loaded");
+    // });
+  }
+  
 }
