@@ -1,0 +1,10 @@
+<div class="modal d-block" [ngClass]="{'show': isLoading}" *ngIf="isLoading">
+    <div class="modal-dialog-centered">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center">
+                <div><strong>{{message}}</strong></div>
+                <div class="spinner-border text-primary" role="status" style="width: 60px; height: 60px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

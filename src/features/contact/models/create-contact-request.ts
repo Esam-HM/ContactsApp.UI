@@ -1,5 +1,4 @@
-export interface IContactList{
-    id: number;
+export interface ICreateContact{
     name: string;
     surname: string | null;
     phoneNumber: string | null;
