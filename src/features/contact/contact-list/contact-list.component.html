@@ -1,5 +1,6 @@
 <div class="container">
     <div class="row">
+        <app-alert-message (toggleVisibility)="onAlertShown()" [isVisible]="showAlert" [message]="alertMessage" class="custom-container"></app-alert-message>
         <h1 class="col-6">Contacts List</h1>
         <div class="col-6 d-flex justify-content-end">
             <button class="btn btn-primary" routerLink="/contacts/add">
@@ -23,7 +24,7 @@
                             <td>{{contact.name}}</td>
                             <td>{{contact.phoneNumber}}</td>
                             <td>
-                                <button class="btn">
+                                <button [routerLink]="['/contacts',contact.id]" class="btn">
                                     <i class="bi bi-info-circle"></i>
                                 </button>
                             </td>

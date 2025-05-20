@@ -2,10 +2,11 @@
     <div class="row">
         <div class="col-12">
             <div class="custom-container">
-                <div *ngIf="showAlert" [ngClass]="isSaved ? 'alert-success' : 'alert-danger'"
-                    class="alert-container alert">
-                    {{alertMassege}}
-                </div>
+                <app-alert-message (toggleVisibility)="onAlertShown()"
+                    [message]="alertMassege"
+                    [alertType]="isSaved ? 1 : 0"
+                    [isVisible]="showAlert">
+                </app-alert-message>
             </div>
         </div>
     </div>
@@ -62,5 +63,5 @@
             </div>
         </div>
     </div>
-    <app-spinner [isLoading]="displayLoading" message="Saving Contact..."></app-spinner>
+    <app-spinner [isVisible]="displayLoading" message="Saving Contact..."></app-spinner>
 </div>

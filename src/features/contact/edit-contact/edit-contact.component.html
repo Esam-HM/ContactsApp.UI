@@ -1,1 +1,98 @@
-<p>edit-contact works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="custom-container">
+                <ng-container *ngIf="contact else notFound">
+                    <app-alert-message (toggleVisibility)="showAlert = false" [isVisible]="showAlert" [message]="alertMessage" [alertType]="alertType"></app-alert-message>
+                    <!-- Header -->
+                    <div>
+                        <h1 class="d-inline">Contact Details</h1>
+                        <button (click)="onEditClicked()" class="btn btn-primary float-end">
+                            <i class="bi" [ngClass]="isEdit? 'bi-x-lg': 'bi-pencil-square'"></i> {{editText}}
+                        </button>
+                    </div>
+                    <!-- Form -->
+                    <form #form="ngForm" (ngSubmit)="onSubmit()" class="mt-5">
+                        <!-- name input -->
+                        <div class="mt-4">
+                            <div class="input-group">
+                                <span class="bi bi-person-fill input-group-text"></span>
+                                <input [(ngModel)]="contact.name" #nameInput="ngModel" required [disabled]="!isEdit"
+                                    class="form-control" placeholder="Name*" name="name">
+                            </div>
+                            <div *ngIf="nameInput.touched && form.submitted">
+                                <small *ngIf="nameInput.errors?.['required']" class="text-danger">**Contact Name
+                                    required</small>
+                            </div>
+                        </div>
+                        <!-- surname input -->
+                        <div class="input-group mt-4">
+                            <span class="bi bi-person-fill input-group-text"></span>
+                            <input [(ngModel)]="contact.surname" [disabled]="!isEdit" class="form-control"
+                                placeholder="Surname" name="surname">
+                        </div>
+                        <!-- phone number input -->
+                        <div class="mt-4">
+                            <div class="input-group">
+                                <span class="bi bi-telephone-fill input-group-text"></span>
+                                <input [(ngModel)]="contact.phoneNumber" [disabled]="!isEdit" maxlength="15"
+                                    class="form-control" placeholder="(xxx-xxx-xxxx)" name="phone">
+                            </div>
+                        </div>
+                        <!-- email input -->
+                        <div class="mt-4">
+                            <div class="input-group">
+                                <span class="bi bi-person-fill input-group-text"></span>
+                                <input #emailInput="ngModel" [(ngModel)]="contact.email"
+                                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$" [disabled]="!isEdit"
+                                    class="form-control" placeholder="user@example.com" name="email">
+                            </div>
+                            <div *ngIf="emailInput.invalid && emailInput.touched">
+                                <small *ngIf="emailInput.errors?.['pattern']" class="text-danger">**Invalid Email
+                                    Format</small>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success me-3"
+                                [ngClass]="isEdit==false ? 'disabled' : '' ">
+                                <i class="bi bi-floppy"></i> Save Changes
+                            </button>
+                            <button (click)="onDeleteClicked()" type="button" class="btn btn-danger ms-3">
+                                <i class="bi bi-trash3"></i> Delete
+                            </button>
+                            <button (click)="onFavoriteClicked()"  type="button" class="btn btn-secondary float-end">
+                                <i class="bi bi-star-fill text-warning"></i> Favorite
+                            </button>
+                        </div>
+                    </form>
+                    <app-spinner [isVisible]="showSpinner" [message]="spinnerMessage"></app-spinner>
+                    <app-confirmation-modal
+                        [isVisible]="showConfirmBox"
+                        header="Delete Contact"
+                        question="You are up to delete contact. Are you sure?"
+                        [btnsText]="['Yes','No']"
+                        [btnsColor]="['btn-danger','btn-secondary']"
+                        (confirmedAction)="deleteContact()"
+                        (canceledAction)="showConfirmBox=false">
+                    </app-confirmation-modal>
+                </ng-container>
+                <!-- Alternative Template -->
+                <ng-template #notFound>
+                    <div class="alert alert-warning">
+                        Couldn't Find Contact Details !!
+                    </div>
+                    <!-- <button (click)="onDeleteClicked()" class="btn btn-danger">Confirm</button>
+                    <app-confirmation-modal
+                        [isVisible]="showConfirmBox"
+                        header="Delete Contact"
+                        question="You are up to delete contact. Are you sure?"
+                        [btnsText]="['Yes','No']"
+                        [btnsColor]="['btn-danger','btn-secondary']"
+                        (confirmedAction)="deleteContact()"
+                        (canceledAction)="showConfirmBox=false">
+                    </app-confirmation-modal> -->
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,17 +6,20 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from "../../../components/spinner/spinner.component";
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertMessageComponent } from "../../../components/alert-message/alert-message.component";
 
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [FormsModule, CommonModule, SpinnerComponent],
+  imports: [FormsModule, CommonModule, SpinnerComponent, AlertMessageComponent],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.css'
 })
 export class AddContactComponent implements OnDestroy{
 
-  constructor(private contactService: ContactService, private router: Router){}
+  constructor(private contactService: ContactService,
+     private router: Router
+  ){}
 
   displayLoading: boolean = false;
   showAlert : boolean = false;
@@ -32,8 +35,6 @@ export class AddContactComponent implements OnDestroy{
   };
 
   createContactSubscription? : Subscription;
-  timerSubscription?: Subscription;
-
 
   onSubmit(): void {
     this.displayLoading = !this.displayLoading;
@@ -45,7 +46,7 @@ export class AddContactComponent implements OnDestroy{
         this.resetForm();
       },
       error: (err) =>{
-        console.log(`Error Happened: ${err}`);
+        console.log(`Error Happened: ${err.message}`);
         this.displayLoading= false;
         this.showAlertBox(false,"Couldn't Save Contact. Try again later");
       }
@@ -56,9 +57,10 @@ export class AddContactComponent implements OnDestroy{
     this.showAlert = true;
     this.isSaved = isSaved;
     this.alertMassege = message;
-    this.timerSubscription = timer(3000).subscribe(()=>{
-      this.showAlert = false;
-    });
+  }
+
+  onAlertShown() : void {
+    this.showAlert = false;
   }
 
   resetForm():void{
@@ -74,7 +76,6 @@ export class AddContactComponent implements OnDestroy{
 
   ngOnDestroy(): void {
     this.createContactSubscription?.unsubscribe();
-    this.timerSubscription?.unsubscribe();
   }
 
 }

@@ -1,0 +1,20 @@
+<ng-container *ngIf="isVisible">
+    <div class="my-modal animate__animated" [ngClass]="outClickAnimation" (click)="nonModalClicked()">
+        <div class="my-modal-content animate__animated animate__fadeInDown" (click)="modalClicked($event)">
+            <div class="my-modal-header">
+                <i class="bi bi-question-circle-fill text-danger icon" ></i>
+                <span class="header"> {{header}}</span>
+                <button (click)="onCancelClicked()" class="close-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="my-modal-body">
+                {{question}}
+            </div>
+            <div class="my-modal-footer">
+                <button (click)="onConfirmClicked()" class="btn me-2" [ngClass]="btnsColor[0]">{{btnsText[0]}}</button>
+                <button (click)="onCancelClicked()" class="btn" [ngClass]="btnsColor[1]">{{btnsText[1]}}</button>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -4,10 +4,16 @@
     box-shadow: 0px 2px 15px #000;
 }
 
+.title-font{
+    font-size: 50px;
+}
+
 .page-title{
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top:10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 50px;
     text-shadow: 0px 0px 1px #000;
 }
 

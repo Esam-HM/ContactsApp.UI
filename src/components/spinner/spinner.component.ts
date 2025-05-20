@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './spinner.component.css'
 })
 export class SpinnerComponent {
-  @Input() isLoading: boolean = false;
+  @Input() isVisible: boolean = false;
   @Input() message: string = "";
 }
