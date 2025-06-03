@@ -7,9 +7,9 @@ import { AlertMessageComponent } from "../../../components/alert-message/alert-m
 import { Subscription } from 'rxjs';
 import { AgGridAngular } from 'ag-grid-angular';
 import type { CellMouseOutEvent, CellMouseOverEvent, ColDef, GridApi, GridOptions, GridReadyEvent} from 'ag-grid-community';
-import { CustomAgGridHeaderComponent } from '../../../components/custom-ag-grid-header/custom-ag-grid-header.component';
+import { CustomAgGridHeaderComponent } from './ag-components/custom-ag-grid-header/custom-ag-grid-header.component';
 import { themeMaterial } from 'ag-grid-community';
-import { AgCellBtnGroupComponent } from '../../../components/ag-cell-btn-group/ag-cell-btn-group.component';
+import { AgCellBtnGroupComponent } from './ag-components/ag-cell-btn-group/ag-cell-btn-group.component';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 import { SpinnerComponent } from "../../../components/spinner/spinner.component";
 
