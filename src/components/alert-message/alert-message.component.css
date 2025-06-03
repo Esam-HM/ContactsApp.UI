@@ -1,0 +1,13 @@
+.--alert-outer-container{
+    position: fixed;
+    left: 0px;
+    top: 72px;
+    width: 100%;
+    z-index: 5;
+}
+
+.--my-alert-container{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

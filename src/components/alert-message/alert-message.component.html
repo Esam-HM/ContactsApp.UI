@@ -1,5 +1,10 @@
 <ng-container *ngIf="isVisible">
-    <div class="alert animate__animated animate__fadeInDown" [ngClass]="alerts[alertType]">
-        {{message}}
+    <div class="--alert-outer-container">
+        <div class="--my-alert-container">
+            <div class="alert animate__animated animate__fadeInDown"
+                [ngClass]="alerts[alertType]">
+                    {{message}}
+            </div>
+        </div>
     </div>
 </ng-container>

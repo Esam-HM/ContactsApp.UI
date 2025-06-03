@@ -1,37 +1,50 @@
 <div class="container">
-    <div class="row">
-        <app-alert-message (toggleVisibility)="onAlertShown()" [isVisible]="showAlert" [message]="alertMessage" class="custom-container"></app-alert-message>
-        <h1 class="col-6">Contacts List</h1>
-        <div class="col-6 d-flex justify-content-end">
-            <button class="btn btn-primary" routerLink="/contacts/add">
-                <i class="bi bi-person-fill-add"></i> New Contact
-            </button>
+    <div class="content">
+        <!-- Alert Message -->
+        <app-alert-message 
+            (toggleVisibility)="showAlert = false" 
+            [isVisible]="showAlert" 
+            [message]="alertMessage"
+            [alertType]="alertType"
+            class="custom-container">
+        </app-alert-message>
+        <!-- Spinner -->
+        <app-spinner 
+            [isVisible]="showSpinner" 
+            [message]="spinnerMessage">
+        </app-spinner>
+        <!-- Confirmation Box -->
+        <app-confirmation-modal
+            [isVisible]="showConfirmBox"
+            header="Delete Contact"
+            question="You are up to delete this contact. Are you sure?"
+            [btnsText]="['Yes','No']"
+            [btnsColor]="['btn-danger','btn-secondary']"
+            (confirmedAction)="deleteContact()"
+            (canceledAction)="showConfirmBox=false">
+        </app-confirmation-modal>
+        <!-- Content -->
+        <div class="row">
+            <h1 class="col-6">Contacts List</h1>
+            <div class="col-6 d-flex justify-content-end">
+                <button class="btn btn-primary" routerLink="/contacts/add">
+                    <i class="bi bi-person-fill-add"></i> New Contact
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <ng-container>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Phone Number</th>
-                        <th scope="col"></th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let contact of contactList; let i=index">
-                            <td>{{i+1}}</td>
-                            <td>{{contact.name}}</td>
-                            <td>{{contact.phoneNumber}}</td>
-                            <td>
-                                <button [routerLink]="['/contacts',contact.id]" class="btn">
-                                    <i class="bi bi-info-circle"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </ng-container>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <ag-grid-angular
+                        class="ag-grid-container"
+                        [gridOptions]="gridOptions"
+                        [rowData]="sampleData"
+                        (cellMouseOver)="onCellHover($event)"
+                        (cellMouseOut)="onCellMouseOut($event)"
+                        (gridReady)="onGridReady($event)"                 
+                    />
+                </div>
+            </div>
         </div>
     </div>
 </div>
