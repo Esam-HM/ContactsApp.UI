@@ -1,0 +1,27 @@
+<nav class="my-navbar">
+  <div class="my-navbar-content">
+
+    <a routerLink="/contacts" class="my-navbar-brand">
+      <img class="brand-logo" src="assets/icon.svg" alt="ContactsApp Logo" width="48" height="42" />
+      <span class="brand-text">ContactsApp</span>
+    </a>
+
+    <ng-container *ngIf="user">
+      <button class="menu-toggle-btn" (click)="toggleMenu()">
+        &#9776;
+      </button>
+      <ul class="links-list" [ngClass]="!collapseMenu ? 'show-links-list' : ''">
+        <li><a class="link" routerLink="/account" routerLinkActive="active" >My Account</a></li>
+        <li><a class="link" routerLink="/contacts" routerLinkActive="active">Contacts</a></li>
+      </ul>
+      
+      <div class="log-info" [ngClass]="!collapseMenu ? 'show-log' : ''">
+        <span class="me-2">{{user.email}}</span>
+        <button (click)="onLogoutClicked()" class="btn btn-primary">Logout</button>
+      </div>
+    </ng-container>
+
+    
+    
+  </div>
+</nav>
