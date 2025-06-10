@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/app-user-model';
-import { AlertMessageComponent } from "../../../components/alert-message/alert-message.component";
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AlertMessageComponent } from '../../../components/alert-message/alert-message.component';
 
 @Component({
   selector: 'app-login',

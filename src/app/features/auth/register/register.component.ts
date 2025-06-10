@@ -1,10 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RegisterRequest } from '../models/register-request-model';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { state } from '@angular/animations';
+import { RegisterRequest } from '../models/register-request-model';
 
 @Component({
   selector: 'app-register',

@@ -3,10 +3,10 @@ import { FormsModule} from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 import { ICreateContact } from '../models/create-contact-request';
 import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from "../../../components/spinner/spinner.component";
 import { Subscription, timer } from 'rxjs';
 import { Router } from '@angular/router';
-import { AlertMessageComponent } from "../../../components/alert-message/alert-message.component";
+import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { AlertMessageComponent } from '../../../components/alert-message/alert-message.component';
 
 @Component({
   selector: 'app-add-contact',

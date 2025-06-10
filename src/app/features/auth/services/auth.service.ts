@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest } from '../models/login-request-model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../models/app-user-model';
-import { environment } from '../../../environments/environment.development';
-import { RegisterRequest } from '../models/register-request-model';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
 import { LoginResponse } from '../models/login-response-model';
+import { User } from '../models/app-user-model';
+import { LoginRequest } from '../models/login-request-model';
+import { environment } from '../../../../environments/environment.development';
+import { RegisterRequest } from '../models/register-request-model';
 
 @Injectable({
   providedIn: 'root'
