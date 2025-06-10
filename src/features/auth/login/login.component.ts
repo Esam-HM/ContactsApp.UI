@@ -6,11 +6,12 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/app-user-model';
 import { AlertMessageComponent } from "../../../components/alert-message/alert-message.component";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, FormsModule, AlertMessageComponent],
+  imports: [RouterLink, FormsModule, AlertMessageComponent, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   showAlert: boolean = false;
 
   constructor(private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ){
     this.request = {
       email: "",
