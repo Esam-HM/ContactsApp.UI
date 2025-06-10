@@ -37,7 +37,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
-        path: '/account',
+        path: 'account',
         component: AccountComponent
     }
 ];
