@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {AllCommunityModule, ModuleRegistry} from 'ag-grid-community';
 import { NavBarComponent } from "../components/nav-bar/nav-bar.component";
@@ -7,9 +7,6 @@ ModuleRegistry.registerModules([
   AllCommunityModule
 ]);
 
-
-declare var particlesJS: any;
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,14 +14,6 @@ declare var particlesJS: any;
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements AfterViewInit {
-
-  
-  
-  ngAfterViewInit(): void {
-    // particlesJS.load("particles-js", "particles.json", () => {
-    //   console.log("callback - particles loaded");
-    // });
-  }
+export class AppComponent{
   
 }
