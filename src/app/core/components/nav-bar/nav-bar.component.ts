@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../features/auth/services/auth.service';
+import { AuthService } from '../../../features/auth/services/auth.service';
 import { Subscription } from 'rxjs';
-import { User } from '../../features/auth/models/app-user-model';
+import { User } from '../../../features/auth/models/app-user-model';
 import { LanguageSwitcherComponent } from "../language-switcher/language-switcher.component";
 import { TranslateModule } from '@ngx-translate/core';
 
