@@ -1,0 +1,41 @@
+.switcher-container{
+    position: relative;
+}
+
+.langs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: absolute;
+    width: 100%;
+    z-index: 4;
+}
+
+.langs-list li {
+    cursor: pointer;
+    padding: 4px 0px 4px 4px;
+}
+
+.langs-list li:hover{
+    background-color: #f0f0f0;
+}
+
+.my-btn{
+    border: none;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.globe-icon{
+    color: #0d6efd;
+}
+
+.lang-txt{
+    margin-left: 5px;
+    vertical-align: middle;
+}

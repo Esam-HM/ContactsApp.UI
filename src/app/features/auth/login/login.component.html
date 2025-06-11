@@ -1,27 +1,27 @@
 <div class="container-fluid">
     <div class="card-container">
         <div class="text-center mt-2">
-            <h2>{{ 'Login' | translate }}</h2>
+            <h2>{{ 'auth.Login' | translate }}</h2>
         </div>
         <div class="mt-5">
             <form #myForm="ngForm" (ngSubmit)="onFormSubmit()">
                 <div class="input-group mt-2">
                     <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                    <input [(ngModel)]="request.email" type="email" name="email" class="form-control" placeholder="user.example@gmail.com*">
+                    <input [(ngModel)]="request.email" type="email" name="email" class="form-control" [placeholder]="'shared.emailReqPH' | translate">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input [(ngModel)]="request.password" type="password" name="password" class="form-control" placeholder="password*">
+                    <input [(ngModel)]="request.password" type="password" name="password" class="form-control" [placeholder]="'shared.passwordPH' | translate">
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary mt-4 w-100">Login</button>
+                    <button type="submit" class="btn btn-primary mt-4 w-100">{{'auth.Login' | translate}}</button>
                     <div class="d-flex align-items-center mt-3">
                         <hr class="flex-grow-1 text-muted">
-                        <span class="mx-2 text-muted small">OR</span>
+                        <span class="mx-2 text-muted small">{{'auth.OR' | translate}}</span>
                         <hr class="flex-grow-1 text-muted">    
                     </div>
-                    <p class="mb-2 mt-0 text-muted small ">Do not have account</p>
-                    <button routerLink="/register" type="button" class="btn btn-warning w-100 my-2">Create New Account</button>
+                    <p class="mb-2 mt-0 text-muted small ">{{'auth.DNHA' | translate}}</p>
+                    <button routerLink="/register" type="button" class="btn btn-warning w-100 my-2">{{'auth.CreateNewAccount' | translate}}</button>
                 </div>
             </form>
         </div>

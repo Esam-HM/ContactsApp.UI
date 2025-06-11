@@ -6,21 +6,24 @@
       <span class="brand-text">ContactsApp</span>
     </a>
 
-    <ng-container *ngIf="user">
-      <button class="menu-toggle-btn" (click)="toggleMenu()">
+    <button class="menu-toggle-btn" (click)="toggleMenu()">
         &#9776;
-      </button>
+    </button>
+
+    <!-- <ng-container *ngIf="user">
       <ul class="links-list" [ngClass]="!collapseMenu ? 'show-links-list' : ''">
         <li><a class="link" routerLink="/account" routerLinkActive="active" >My Account</a></li>
         <li><a class="link" routerLink="/contacts" routerLinkActive="active">Contacts</a></li>
       </ul>
-      
-      <div class="log-info" [ngClass]="!collapseMenu ? 'show-log' : ''">
+    </ng-container> -->
+  
+    <div class="log-info" [ngClass]="!collapseMenu ? 'show-log' : ''">
+      <app-language-switcher></app-language-switcher>
+      <ng-container *ngIf="user">
         <span class="me-2">{{user.email}}</span>
-        <button (click)="onLogoutClicked()" class="btn btn-primary">Logout</button>
-      </div>
-    </ng-container>
-
+        <button (click)="onLogoutClicked()" class="btn btn-primary">{{ 'Logout' | translate }}</button>
+      </ng-container>
+    </div>
     
     
   </div>

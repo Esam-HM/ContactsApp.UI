@@ -1,5 +1,51 @@
 {
-    "Login": "Giriş Yap",
+  "auth": {
     "Register": "Kayıt Ol",
-    "CreateNewAccount": "Yeni Hesap Oluştur" 
+    "Login": "Giriş Yap",
+    "Logout": "Çıkış Yap",
+    "OR": "VEYA",
+    "DNHA": "Hesabınız yok mu?",
+    "CreateNewAccount": "Yeni Hesap Oluştur"
+  },
+  "shared": {
+    "passwordPH": "şifre*",
+    "emailReqPH": "kullanici@ornek.com",
+    "emailPH": "kullanici@ornek.com",
+    "usernamePH": "kullanıcı adı",
+    "namePH": "isim",
+    "surnamePH": "soyisim",
+    "Save": "Kaydet",
+    "SaveChgs": "Değişiklikleri Kaydet",
+    "Delete": "Sil",
+    "Favorite": "Favori",
+    "Cancel": "İptal",
+    "Edit": "Düzenle",
+    "Yes": "Evet",
+    "No": "Hayır",
+    "SavingCont": "Kişi kaydediliyor...",
+    "InvalidEmailFrmt": "geçersiz e-posta formatı"
+  },
+  "contact": {
+    "NewContact": "Yeni Kişi",
+    "ContactDtls": "Kişi Detayları",
+    "ContactsList": "Kişi Listesi",
+    "Name" : "İsim",
+    "Phone": "Telefon",
+    "Email": "Email"
+  },
+  "messages": {
+    "InvalidEmailFrmt": "geçersiz e-posta formatı",
+    "ContNameReq": "**Kişi ismi gerekli",
+    "SavingCont": "Kişi kaydediliyor...",
+    "dltQuesHead": "Kişiyi Sil",
+    "dltQues": "Kişiyi silmek üzeresiniz. Emin misiniz?",
+    "CNFCD": "Kişi detayları bulunamadı!!",
+    "PswrdLen": "**Şifre en az 6 karakter olmalı",
+    "ContactDltSuccess": "{{name}} başarıyla silindi",
+    "ContactDltFail": "{{name}} kişi rehberi silinemedi!",
+    "ContactUpdateSuccess": "kişi rehberi başarıyla güncellendi",
+    "ContactUpdateFail": "kişi rehberi güncellenemedi!",
+    "ContactAddSuccess": "Kişi rehberi başarıyla eklendi",
+    "ContactAddFail": "Kişi rehberi eklenemedi!"
+  }
 }

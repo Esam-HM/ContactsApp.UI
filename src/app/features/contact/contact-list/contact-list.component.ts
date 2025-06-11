@@ -12,28 +12,22 @@ import { AgCellBtnGroupComponent } from './ag-components/ag-cell-btn-group/ag-ce
 import { AlertMessageComponent } from '../../../components/alert-message/alert-message.component';
 import { ConfirmationModalComponent } from '../../../components/confirmation-modal/confirmation-modal.component';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [AgGridAngular, CommonModule, RouterLink, AlertMessageComponent, ConfirmationModalComponent, SpinnerComponent],
+  imports: [AgGridAngular, TranslateModule, CommonModule, RouterLink, AlertMessageComponent, ConfirmationModalComponent, SpinnerComponent],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.css'
 })
 export class ContactListComponent implements OnInit, OnDestroy {
-
-  constructor(private contactService: ContactService,
-    private router: Router
-  ) 
-  {
-    //this.getNavigationMessage();
-  }
-
   showAlert : boolean = false;
   alertMessage : string = "";
   alertType : number = 0;
   message : string = '';
 
+  boxBtnsText : string[] = [];
   showConfirmBox : boolean = false;
 
   showSpinner : boolean = false;
@@ -42,23 +36,15 @@ export class ContactListComponent implements OnInit, OnDestroy {
   contactList?: IContactList[];
   contactToDelete!: IContactList;
 
-  colDefs : ColDef[] = [
-    {headerName : "#" , width: 80, valueGetter : 'node.rowIndex+1'},
-    {field : "name", flex: 1, maxWidth : 200},
-    {headerName : "Phone", field : "phoneNumber", flex: 1, maxWidth: 180},
-    {field : "email", flex : 1},
-    {
-      field: "action", 
-      headerComponent: CustomAgGridHeaderComponent,
-      cellRenderer : AgCellBtnGroupComponent,
-      cellRendererParams : {
-        onDelete : (rowData : IContactList) => this.onDeleteContact(rowData),
-        onEdit : (rowData : IContactList) => this.onEditContact(rowData.id),
-        onToggleFavorite : (rowData : IContactList) => this.toggleFavorite(rowData),
-      },
-      flex : 1
-    }
-  ];
+  constructor(private contactService: ContactService,
+    private router: Router,
+    private translateService: TranslateService
+  ) 
+  {
+    //this.getNavigationMessage();
+  }
+
+  colDefs : ColDef[] = [];
 
   defaultColDef: ColDef = {
     resizable: false,
@@ -94,6 +80,35 @@ export class ContactListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log("ngOnInit");
+
+    const translationKeys = [
+      "contact.Name", "contact.Email", "contact.Phone", "shared.Edit",
+      "shared.Delete", "shared.Favorite", "shared.Yes", "shared.No"
+    ];
+
+    this.translateService.get(translationKeys).subscribe(
+      translations => {
+        this.colDefs = [
+          {headerName: "#" , width: 80, valueGetter : 'node.rowIndex+1'},
+          {headerName: translations["contact.Name"], field : "name", flex: 1, maxWidth : 200},
+          {headerName : translations["contact.Phone"], field : "phoneNumber", flex: 1, maxWidth: 180},
+          {headerName : translations["contact.Email"], field : "email", flex : 1},
+          {
+            field: "action", 
+            headerComponent: CustomAgGridHeaderComponent,
+            cellRenderer : AgCellBtnGroupComponent,
+            cellRendererParams : {
+            onDelete : (rowData : IContactList) => this.onDeleteContact(rowData),
+            onEdit : (rowData : IContactList) => this.onEditContact(rowData.id),
+            onToggleFavorite : (rowData : IContactList) => this.toggleFavorite(rowData),
+            },
+            flex : 1
+          }
+        ];
+        this.boxBtnsText = [translations["shared.Yes"], translations["shared.No"]];
+      }
+    );
+
     this.gridOptions = {
       theme: themeMaterial,
       pagination : true,
@@ -117,7 +132,6 @@ export class ContactListComponent implements OnInit, OnDestroy {
     });
     
     this.getNavigationMessage();
-
   }
 
   onDeleteContact(contact : IContactList) : void {
@@ -128,20 +142,17 @@ export class ContactListComponent implements OnInit, OnDestroy {
   deleteContact() : void {
     this.showConfirmBox= false;
     this.gridApi.applyTransactionAsync({remove : [this.contactToDelete]});
-    this.showAlertMessage(1, `${this.contactToDelete.name} deleted successfully`);
-    // this.showSpinner=true;
-    // this.spinnerMessage = "Deleting Contact...";
-    // this.deleteContactSubscription = this.contactService.deleteContact(this.contactToDelete.id).subscribe({
-    //   next: (response) => {
-    //     this.showSpinner = false;
-    //     this.showAlertMessage(1, `${this.contactToDelete.name} deleted successfully`);
-    //   },
-    //   error: (err) => {
-    //     this.showAlertMessage(0,"Could not delete contact! Please try again later.");
-    //     this.showSpinner = false;
-    //     console.log("Error on delete contact", err.message);
-    //   }
-    // });
+    //this.showAlertMessage(1, "messages.ContactDltSuccess", this.contactToDelete.name);
+    this.deleteContactSubscription = this.contactService.deleteContact(this.contactToDelete.id).subscribe({
+      next: (response) => {
+        this.showAlertMessage(1, "messages.ContactDltSuccess", this.contactToDelete.name);
+      },
+      error: (err) => {
+        this.showAlertMessage(0, "messages.ContactDltFail", this.contactToDelete.name);
+        this.showSpinner = false;
+        console.log("Error on delete contact", err.message);
+      }
+    });
   }
 
   onEditContact(id : number) : void {
@@ -193,9 +204,19 @@ export class ContactListComponent implements OnInit, OnDestroy {
     }
   }
 
-  showAlertMessage(alert_type : number, message : string) : void {
+  // showAlertMessage(alert_type : number, message : string) : void {
+  //   this.showAlert = true;
+  //   this.alertMessage = message;
+  //   this.alertType = alert_type;
+  // }
+
+  showAlertMessage(alert_type : number, translateKey: string, interpolationMsg: string) : void {
+    this.translateService.get(translateKey, { name : interpolationMsg}).subscribe(
+      translatedMessage => {
+        this.alertMessage = translatedMessage;
+      }
+    )
     this.showAlert = true;
-    this.alertMessage = message;
     this.alertType = alert_type;
   }
 

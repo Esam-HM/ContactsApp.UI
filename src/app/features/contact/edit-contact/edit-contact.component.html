@@ -6,7 +6,7 @@
                     <app-alert-message (toggleVisibility)="showAlert = false" [isVisible]="showAlert" [message]="alertMessage" [alertType]="alertType"></app-alert-message>
                     <!-- Header -->
                     <div>
-                        <h1 class="d-inline">Contact Details</h1>
+                        <h1 class="d-inline">{{'contact.ContactDtls' | translate }}</h1>
                         <button (click)="onEditClicked()" class="btn btn-primary float-end">
                             <i class="bi" [ngClass]="isEdit? 'bi-x-lg': 'bi-pencil-square'"></i> {{editText}}
                         </button>
@@ -18,18 +18,19 @@
                             <div class="input-group">
                                 <span class="bi bi-person-fill input-group-text"></span>
                                 <input [(ngModel)]="contact.name" #nameInput="ngModel" required [disabled]="!isEdit"
-                                    class="form-control" placeholder="Name*" name="name">
+                                    class="form-control" [placeholder]="'shared.namePH' | translate" name="name">
                             </div>
                             <div *ngIf="nameInput.touched && form.submitted">
-                                <small *ngIf="nameInput.errors?.['required']" class="text-danger">**Contact Name
-                                    required</small>
+                                <small *ngIf="nameInput.errors?.['required']" class="text-danger">
+                                    {{'messages.ContactNameReq' | translate }}
+                                </small>
                             </div>
                         </div>
                         <!-- surname input -->
                         <div class="input-group mt-4">
                             <span class="bi bi-person-fill input-group-text"></span>
                             <input [(ngModel)]="contact.surname" [disabled]="!isEdit" class="form-control"
-                                placeholder="Surname" name="surname">
+                                [placeholder]="'shared.surnamePH' | translate" name="surname">
                         </div>
                         <!-- phone number input -->
                         <div class="mt-4">
@@ -45,32 +46,33 @@
                                 <span class="bi bi-person-fill input-group-text"></span>
                                 <input #emailInput="ngModel" [(ngModel)]="contact.email"
                                     pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$" [disabled]="!isEdit"
-                                    class="form-control" placeholder="user@example.com" name="email">
+                                    class="form-control" [placeholder]="'shared.emailPH' | translate" name="email">
                             </div>
                             <div *ngIf="emailInput.invalid && emailInput.touched">
-                                <small *ngIf="emailInput.errors?.['pattern']" class="text-danger">**Invalid Email
-                                    Format</small>
+                                <small *ngIf="emailInput.errors?.['pattern']" class="text-danger">
+                                    {{'messages.InvalidEmailFrmt' | translate }}
+                                </small>
                             </div>
                         </div>
                         <div class="mt-4">
                             <button type="submit" class="btn btn-success me-3"
                                 [ngClass]="isEdit==false ? 'disabled' : '' ">
-                                <i class="bi bi-floppy"></i> Save Changes
+                                <i class="bi bi-floppy"></i> {{'shared.SaveChgs' | translate }}
                             </button>
                             <button (click)="onDeleteClicked()" type="button" class="btn btn-danger ms-3">
-                                <i class="bi bi-trash3"></i> Delete
+                                <i class="bi bi-trash3"></i> {{'shared.Delete' | translate}}
                             </button>
                             <button (click)="onFavoriteClicked()"  type="button" class="btn btn-secondary float-end">
-                                <i class="bi bi-star-fill text-warning"></i> Favorite
+                                <i class="bi bi-star-fill text-warning"></i> {{'shared.Favorite' | translate}}
                             </button>
                         </div>
                     </form>
                     <app-spinner [isVisible]="showSpinner" [message]="spinnerMessage"></app-spinner>
                     <app-confirmation-modal
                         [isVisible]="showConfirmBox"
-                        header="Delete Contact"
-                        question="You are up to delete contact. Are you sure?"
-                        [btnsText]="['Yes','No']"
+                        [header]="'messages.DltQuesHead' | translate"
+                        [question]="'messages.DltQues' | translate"
+                        [btnsText]="boxBtnsText"
                         [btnsColor]="['btn-danger','btn-secondary']"
                         (confirmedAction)="deleteContact()"
                         (canceledAction)="showConfirmBox=false">
@@ -79,18 +81,8 @@
                 <!-- Alternative Template -->
                 <ng-template #notFound>
                     <div class="alert alert-warning">
-                        Couldn't Find Contact Details !!
+                        {{ 'messages.CNFCD' | translate }}
                     </div>
-                    <!-- <button (click)="onDeleteClicked()" class="btn btn-danger">Confirm</button>
-                    <app-confirmation-modal
-                        [isVisible]="showConfirmBox"
-                        header="Delete Contact"
-                        question="You are up to delete contact. Are you sure?"
-                        [btnsText]="['Yes','No']"
-                        [btnsColor]="['btn-danger','btn-secondary']"
-                        (confirmedAction)="deleteContact()"
-                        (canceledAction)="showConfirmBox=false">
-                    </app-confirmation-modal> -->
                 </ng-template>
             </div>
         </div>

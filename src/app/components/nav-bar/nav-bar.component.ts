@@ -4,11 +4,13 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../features/auth/services/auth.service';
 import { Subscription } from 'rxjs';
 import { User } from '../../features/auth/models/app-user-model';
+import { LanguageSwitcherComponent } from "../language-switcher/language-switcher.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [TranslateModule, RouterLink, RouterLinkActive, CommonModule, LanguageSwitcherComponent],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })

@@ -10,7 +10,6 @@
 .my-navbar-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 14px 20px;
 }
 
@@ -51,6 +50,7 @@
   color: #fff;
   display: flex;
   align-items: center;
+  margin-left: auto;
   gap: 10px;
 }
 
@@ -70,6 +70,7 @@
 
   .menu-toggle-btn {
     display: block;
+    margin-left: auto;
   }
 
   .links-list {

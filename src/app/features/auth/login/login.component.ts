@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   showAlert: boolean = false;
 
   constructor(private authService: AuthService,
-    private router: Router,
-    private translate: TranslateService
+    private router: Router
   ){
     this.request = {
       email: "",

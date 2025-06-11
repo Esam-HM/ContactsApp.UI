@@ -1,5 +1,51 @@
 {
-    "Login": "Login",
-    "Register": "Register",
-    "CreateNewAccount": "Create New Account" 
+    "auth": {
+        "Register": "Register",
+        "Login": "Login",
+        "Logout": "Logout",
+        "OR": "OR",
+        "DNHA": "Do not have account?",
+        "CreateNewAccount": "Create New Account"
+    },
+    "shared": {
+        "passwordPH": "password*",
+        "emailReqPH": "user@example.com*",
+        "emailPH": "user@example.com",
+        "usernamePH": "username",
+        "namePH": "name*",
+        "surnamePH": "surname",
+        "Save": "Save",
+        "SaveChgs": "Save Changes",
+        "Delete": "Delete",
+        "Favorite": "Favorite",
+        "Cancel": "Cancel",
+        "Edit": "Edit",
+        "Yes": "Yes",
+        "No": "No",
+        "SavingCont": "Saving Contact...",
+        "InvalidEmailFrmt": "invalid email format"
+    },
+    "contact": {
+        "NewContact": "New Contact",
+        "ContactDtls": "Contact Details",
+        "ContactsList": "Contact List",
+        "Name" : "Name",
+        "Phone": "Phone",
+        "Email": "Email"
+    },
+    "messages": {
+        "InvalidEmailFrmt": "invalid email format",
+        "ContNameReq": "**Contact Name required",
+        "SavingCont": "Saving Contact...",
+        "dltQuesHead": "Delete Contact",
+        "dltQues": "You are up to delete contact. Are you sure?",
+        "CNFCD": "Couldn't Find Contact Details !!",
+        "PswrdLen": "**Password length at least 6",
+        "ContactDltSuccess": "{{name}} deleted successfully",
+        "ContactDltFail": "Couldn't delete {{name}}",
+        "ContactUpdateSuccess": "contact details updated successfully",
+        "ContactUpdateFail": "Could not update contact details",
+        "ContactAddSuccess": "Contact added successfully",
+        "ContactAddFail": "Could not add this contact"
+    }
 }

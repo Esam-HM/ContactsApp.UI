@@ -16,19 +16,20 @@
         <!-- Confirmation Box -->
         <app-confirmation-modal
             [isVisible]="showConfirmBox"
-            header="Delete Contact"
-            question="You are up to delete this contact. Are you sure?"
-            [btnsText]="['Yes','No']"
+            [header]="'messages.dltQuesHead' | translate "
+            [question]="'messages.dltQues' | translate "
+            [btnsText]="boxBtnsText"
             [btnsColor]="['btn-danger','btn-secondary']"
             (confirmedAction)="deleteContact()"
             (canceledAction)="showConfirmBox=false">
         </app-confirmation-modal>
         <!-- Content -->
         <div class="row">
-            <h1 class="col-6">Contacts List</h1>
+            <h1 class="col-6">{{ 'contact.ContactsList' | translate }}</h1>
             <div class="col-6 d-flex justify-content-end">
                 <button class="btn btn-primary" routerLink="/contacts/add">
-                    <i class="bi bi-person-fill-add"></i> New Contact
+                    <i class="bi bi-person-fill-add"></i>
+                    {{ 'contact.NewContact' | translate }}
                 </button>
             </div>
         </div>

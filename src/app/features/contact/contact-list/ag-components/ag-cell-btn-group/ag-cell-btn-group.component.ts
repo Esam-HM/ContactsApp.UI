@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
@@ -12,15 +13,15 @@ interface ICustomCellRendererParams extends ICellRendererParams {
 @Component({
   selector: 'app-ag-cell-btn-group',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <ng-container *ngIf="showBtns">
       <div class="d-flex justify-content-center align-items-center">
-        <button (click)="toggleFavorite()" title="set favorite" class="btn bg-transparent p-2 m-0">
+        <button (click)="toggleFavorite()" [title]="'shared.Favorite'| translate" class="btn bg-transparent p-2 m-0">
             <i class="bi" [ngClass]="isFavorite ? 'bi-star-fill text-warning' : 'bi-star'"></i>
         </button>
-        <button (click)="onEditClicked()" title="edit" class="btn bg-transparent p-2 m-0"><i class="bi bi-pencil-fill text-secondary"></i></button>
-        <button (click)="onDeleteClicked()" title="delete" class="btn bg-transparent p-2 m-0"><i class="bi bi-trash-fill text-danger"></i></button>
+        <button (click)="onEditClicked()" [title]="'shared.Edit' | translate" class="btn bg-transparent p-2 m-0"><i class="bi bi-pencil-fill text-secondary"></i></button>
+        <button (click)="onDeleteClicked()" [title]="'shared.Delete' | translate" class="btn bg-transparent p-2 m-0"><i class="bi bi-trash-fill text-danger"></i></button>
       </div>  
     </ng-container>
   `,

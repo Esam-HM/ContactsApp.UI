@@ -8,28 +8,22 @@ import { IContactDetail } from '../models/contact-details';
 import { SpinnerComponent } from "../../../components/spinner/spinner.component";
 import { AlertMessageComponent } from "../../../components/alert-message/alert-message.component";
 import { ConfirmationModalComponent } from "../../../components/confirmation-modal/confirmation-modal.component";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, SpinnerComponent, AlertMessageComponent, ConfirmationModalComponent],
+  imports: [CommonModule, FormsModule, TranslateModule, SpinnerComponent, AlertMessageComponent, ConfirmationModalComponent],
   templateUrl: './edit-contact.component.html',
   styleUrl: './edit-contact.component.css'
 })
 export class EditContactComponent implements OnInit, OnDestroy {
-
-  constructor(private route: ActivatedRoute,
-    private contactService: ContactService,
-    private router : Router
-  ){}
-
-
   id?: number;
   contact? : IContactDetail;
   bufferedContact? : IContactDetail;
   //
   isEdit: boolean = false;    // edit or cancel
-  editText : string = "Edit"; // edit text button
+  editText!: string; // edit text button
   //
   showSpinner : boolean = false;
   spinnerMessage: string = "";
@@ -39,6 +33,7 @@ export class EditContactComponent implements OnInit, OnDestroy {
   alertType : number = 0;
   //
   showConfirmBox : boolean = false;
+  boxBtnsText : string[] = [];
   toDelete: boolean = false;
 
   // subscriptions
@@ -46,6 +41,13 @@ export class EditContactComponent implements OnInit, OnDestroy {
   getContactSubscription? : Subscription;
   updateContactSubscription? : Subscription;
   contactDeleteSubscription? : Subscription;
+  translateSubscription? : Subscription; 
+
+  constructor(private route: ActivatedRoute,
+    private contactService: ContactService,
+    private router : Router,
+    private translateService: TranslateService
+  ){}
 
   ngOnInit(): void {
     let _idParam : string | null = null; 
@@ -65,6 +67,18 @@ export class EditContactComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.translateService.get(["shared.Yes", "shared.No"]).subscribe(
+      (translations) => {
+        this.boxBtnsText = [translations["shared.Yes"],translations["shared.No"]];
+      }
+    );
+
+    this.translateSubscription = this.translateService.onLangChange.subscribe(
+      () => {
+        this.toggleEditMode();
+      }
+    );
+
     this.getContactSubscription = this.contactService.getContactById(this.id).subscribe({
       next: (response) => {
         this.contact = response;
@@ -81,12 +95,14 @@ export class EditContactComponent implements OnInit, OnDestroy {
     this.isEdit = !this.isEdit;
 
     if(this.isEdit){
-      this.editText = "Cancel";
+      //this.editText = "Cancel";
     }else{
       // cancel editing
-      this.editText = "Edit";
+      //this.editText = "Edit";
       this.contact = structuredClone(this.bufferedContact);
     }
+
+    this.toggleEditMode();
   }
 
   onFavoriteClicked(): void{
@@ -130,12 +146,10 @@ export class EditContactComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.showSpinner = false;
           console.log(response);
-          this.router.navigateByUrl("/contacts", {
-            state : { message : `${this.contact?.name} Deleted Successfully.`}
-          });
+          this.navigateWithMessage();
         },
         error: (err) => {
-          this.showAlertMessage(0,"Could not delete contact! Please try again later.")
+          this.showAlertMessage(0,"messages.ContactUpdateFail");
           this.showSpinner = false;
           console.log("Error on delete contact", err.message);
         }
@@ -148,34 +162,37 @@ export class EditContactComponent implements OnInit, OnDestroy {
     this.updateContactSubscription?.unsubscribe();
     this.getContactSubscription?.unsubscribe();
     this.contactDeleteSubscription?.unsubscribe();
+    this.translateSubscription?.unsubscribe();
   }
 
-  showAlertMessage(alertType : number, message: string) : void{
+  showAlertMessage(alert_type : number, translateKey: string) : void {
+    this.translateService.get(translateKey).subscribe(
+      translatedMessage => {
+        this.alertMessage = translatedMessage;
+      }
+    );
     this.showAlert = true;
-    this.alertType = alertType;
-    this.alertMessage = message;
+    this.alertType = alert_type;
   }
 
+  navigateWithMessage(): void{
+    let msg = "";
+    this.translateService.get( "messages.ContactDltSuccess", { name : this.contact?.name}).subscribe(
+      (translatedMsg) => {
+        msg = translatedMsg;
+      }
+    );
+    this.router.navigateByUrl("/contacts", {
+      state : { message : msg}
+    });
+  }
 
-
-  // revertContactChanges(): void{
-  //   if(this.contact && this.bufferedContact){
-  //     this.contact.name = this.bufferedContact.name;
-  //     this.contact.surname = this.bufferedContact.surname;
-  //     this.contact.phoneNumber = this.bufferedContact.phoneNumber;
-  //     this.contact.email = this.bufferedContact.email;
-  //     this.contact.isFavorite = this.bufferedContact.isFavorite;
-  //   }
-  // }
-
-  
-  // saveContactChanges(): void{
-  //   if(this.contact && this.bufferedContact){
-  //     this.bufferedContact.name = this.contact.name;
-  //     this.bufferedContact.surname = this.contact.surname;
-  //     this.bufferedContact.phoneNumber = this.contact.phoneNumber;
-  //     this.bufferedContact.email = this.contact.email;
-  //     this.bufferedContact.isFavorite = this.contact.isFavorite;
-  //   }
+  toggleEditMode() {
+    const key = this.isEdit ? 'shared.Cancel' : 'shared.Edit';
+    this.translateSubscription?.unsubscribe();
+    this.translateSubscription = this.translateService.get(key).subscribe(res => {
+      this.editText = res;
+    });
+  }
 
 }

@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="custom-container">
                 <app-alert-message (toggleVisibility)="onAlertShown()"
-                    [message]="alertMassege"
+                    [message]="alertMessage"
                     [alertType]="isSaved ? 1 : 0"
                     [isVisible]="showAlert">
                 </app-alert-message>
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-12">
             <div class="text-center mt-3 mb-5">
-                <h1>New Contact</h1>
+                <h1>{{ 'contact.NewContact' | translate }}</h1>
             </div>
             <div class="custom-container mt-5">
                 <form #form="ngForm" (ngSubmit)="onSubmit()">
@@ -21,16 +21,18 @@
                         <span class="input-group-text">
                             <i class="bi bi-person-fill"></i>
                         </span>
-                        <input [(ngModel)]="newContact.name" placeholder="Name*" type="text" name="contactName"
-                            class="form-control" />
+                        <input [(ngModel)]="newContact.name" type="text" name="contactName"
+                            class="form-control"
+                            [placeholder]="'shared.namePH' | translate"/>
                     </div>
 
                     <div class="input-group mt-4">
                         <span class="input-group-text">
                             <i class="bi bi-person-fill"></i>
                         </span>
-                        <input [(ngModel)]="newContact.surname" placeholder="Surname" type="text" name="contactSurname"
-                            class="form-control" />
+                        <input [(ngModel)]="newContact.surname" type="text" name="contactSurname"
+                            class="form-control"
+                            [placeholder]="'shared.surnamePH' | translate" />
                     </div>
 
                     <div class="input-group mt-4">
@@ -46,22 +48,22 @@
                             <i class="bi bi-envelope-fill"></i>
                         </span>
                         <input #emailInput="ngModel" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$"
-                            [(ngModel)]="newContact.email" placeholder="email@example.com" type="email" name="email"
+                            [(ngModel)]="newContact.email" [placeholder]="'shared.emailPH' | translate" type="email" name="email"
                             class="form-control" />
                     </div>
 
                     <div *ngIf="emailInput.invalid && emailInput.touched">
-                        <div class="text-danger" *ngIf="emailInput.errors?.['pattern']">Invalid Email Format</div>
+                        <div class="text-danger" *ngIf="emailInput.errors?.['pattern']">{{'messages.InvalidEmailFrmt' | translate }}</div>
                     </div>
 
                     <div class="mt-4">
                         <button type="submit" [disabled]="form.invalid" class="btn btn-success me-3"
-                            [ngClass]="{'disabled': newContact.name===''}">Save</button>
-                        <button (click)="returnBack()" type="button" class="btn btn-danger ms-3">Cancel</button>
+                            [ngClass]="{'disabled': newContact.name===''}">{{ 'shared.Save' | translate}}</button>
+                        <button (click)="returnBack()" type="button" class="btn btn-danger ms-3">{{ 'shared.Cancel' | translate}}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <app-spinner [isVisible]="displayLoading" message="Saving Contact..."></app-spinner>
+    <app-spinner [isVisible]="displayLoading" [message]="'messages.SavingCont' | translate "></app-spinner>
 </div>

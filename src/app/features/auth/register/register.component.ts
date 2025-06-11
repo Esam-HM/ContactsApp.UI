@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { RegisterRequest } from '../models/register-request-model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslateModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

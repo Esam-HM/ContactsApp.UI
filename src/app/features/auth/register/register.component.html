@@ -1,24 +1,24 @@
 <div class="container-fluid">
     <div class="card-container">
         <div class="text-center mt-2">
-            <h2>Register</h2>
+            <h2>{{ 'auth.Register' | translate }}</h2>
         </div>
         <div class="mt-5">
             <form #myForm="ngForm" (ngSubmit)="onFormSubmit()">
                 <div class="input-group mt-3">
                     <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                    <input [(ngModel)]="model.fullName" name="fullName" type="text" class="form-control" placeholder="username*">
+                    <input [(ngModel)]="model.fullName" name="fullName" type="text" class="form-control" [placeholder]="'shared.usernamePH' | translate">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                    <input [(ngModel)]="model.email" name="email" type="email" class="form-control" placeholder="user.example@gmail.com*">
+                    <input [(ngModel)]="model.email" name="email" type="email" class="form-control" [placeholder]="'shared.emailReqPH' | translate">
                 </div>
                 <div class="input-group mt-3">
                     <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                    <input [(ngModel)]="model.password" name="password" type="password" class="form-control" placeholder="password*">
+                    <input [(ngModel)]="model.password" name="password" type="password" class="form-control" [placeholder]="'shared.passwordPH' | translate">
                 </div>
-                <p class="text-muted small ms-2 mt-1">**password of length 6</p>
-                <button type="submit" class="btn btn-warning mt-3 w-100">Register</button>
+                <p class="text-muted small ms-2 mt-1">{{'messages.PswrdLen' | translate}}</p>
+                <button type="submit" class="btn btn-warning mt-3 w-100">{{'auth.Register' | translate}}</button>
             </form>
         </div>
     </div>
